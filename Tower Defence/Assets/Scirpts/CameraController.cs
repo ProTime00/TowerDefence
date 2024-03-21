@@ -8,7 +8,7 @@ namespace Scirpts
     {
 
         private float _panSpeed = 0.1f;
-        public float pixelBuffer = 10;
+        private float _pixelBuffer = 10;
 
         private bool _doMovement = true;
         private float _scrollSpeed = 5;
@@ -45,20 +45,20 @@ namespace Scirpts
         {
             Vector3 mov = Vector3.zero;
 
-            if (Input.GetKey(KeyCode.UpArrow) || Input.mousePosition.y >= Screen.height - pixelBuffer)
+            if (Input.GetKey(KeyCode.UpArrow) || Input.mousePosition.y >= Screen.height - _pixelBuffer)
             {
                 mov.z = 1;
             }
             
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.mousePosition.x <= pixelBuffer)
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.mousePosition.x <= _pixelBuffer)
             {
                 mov.x = -1;
             }
-            if (Input.GetKey(KeyCode.DownArrow) || Input.mousePosition.y <= pixelBuffer)
+            if (Input.GetKey(KeyCode.DownArrow) || Input.mousePosition.y <= _pixelBuffer)
             {
                 mov.z = -1;
             }
-            if (Input.GetKey(KeyCode.RightArrow) || Input.mousePosition.x >= Screen.width - pixelBuffer)
+            if (Input.GetKey(KeyCode.RightArrow) || Input.mousePosition.x >= Screen.width - _pixelBuffer)
             {
                 mov.x = 1;
             }
