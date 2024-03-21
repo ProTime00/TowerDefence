@@ -7,13 +7,13 @@ namespace Scirpts
     public class CameraController : MonoBehaviour
     {
 
-        public float panSpeed = 30;
+        private float _panSpeed = 0.1f;
         public float pixelBuffer = 10;
 
         private bool _doMovement = true;
         private float _scrollSpeed = 5;
         private float _minY = 10;
-        private float _maxY = 80;
+        private float _maxY = 300;
 
         private void Update()
         {
@@ -81,7 +81,7 @@ namespace Scirpts
             }
             
             
-            transform.Translate(mov.normalized, Space.World);
+            transform.Translate(mov.normalized * _panSpeed, Space.World);
         }
     }
 }

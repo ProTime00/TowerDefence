@@ -118,6 +118,7 @@
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:TEXTCORE_FONT_ENGINE_1_5_OR_NEWER
 -define:UNITY_POST_PROCESSING_STACK_V2
+-define:CROSS_PLATFORM_INPUT
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
 -r:"/Applications/Unity/Hub/Editor/2022.3.21f1/PlaybackEngines/AndroidPlayer/Unity.Android.Gradle.dll"
@@ -348,7 +349,7 @@
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"/Applications/Unity/Hub/Editor/2022.3.21f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"/Applications/Unity/Hub/Editor/2022.3.21f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
-"Library/PackageCache/com.unity.terrain-tools@5.0.4/Runtime/TerrainToolbox/TerrainGroup.cs"
+"Packages/com.unity.terrain-tools@5.0.4/Runtime/TerrainToolbox/TerrainGroup.cs"
 -langversion:9.0
 
 /deterministic
@@ -365,6 +366,6 @@
 /utf8output
 /preferreduilang:en-US
 
--warn:0
+
 
 /additionalfile:"Library/Bee/artifacts/200b0aE.dag/Unity.TerrainTools.UnityAdditionalFile.txt"
