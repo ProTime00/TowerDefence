@@ -16,17 +16,18 @@ namespace Scirpts
         }
 
         public GameObject standartTurretPrefab;
-
-        private void Start()
-        {
-            _turretToBuild = standartTurretPrefab;
-        }
+        public GameObject secondTurretPrefab;
 
         private GameObject _turretToBuild;
 
         public GameObject GetTurretToBuild()
         {
             return _turretToBuild;
+        }
+
+        public void SetTurretToBuild(GameObject turret)
+        {
+            _turretToBuild = turret;
         }
     }
 }

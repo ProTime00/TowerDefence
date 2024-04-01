@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Scirpts
 {
@@ -19,6 +20,10 @@ namespace Scirpts
 
         private void OnMouseDown()
         {
+            if (BuildManager.Instance.GetTurretToBuild() is null)
+            {
+                return;
+            }
             if (_turret != null)
             {
                 Debug.Log("cant build here");
@@ -26,6 +31,7 @@ namespace Scirpts
             }
 
             var turretToBuild = BuildManager.Instance.GetTurretToBuild();
+            
             Vector3 offset = Vector3.zero;
             offset.y += 0.5f;
             _turret = Instantiate(turretToBuild, transform.position + offset, transform.rotation);
@@ -33,6 +39,14 @@ namespace Scirpts
 
         private void OnMouseEnter()
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            if (BuildManager.Instance.GetTurretToBuild() is null)
+            {
+                return;
+            }
             _material.color = Color.cyan;
         }
 
