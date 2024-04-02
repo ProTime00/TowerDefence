@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Scirpts
@@ -7,6 +8,7 @@ namespace Scirpts
         private Transform _target;
 
         public float speed = 70;
+        public float AOE;
 
         public GameObject BulletDestroyEffect;
         
@@ -33,15 +35,47 @@ namespace Scirpts
             }
             
             transform.Translate(dir.normalized * distThisFrame, Space.World);
-
+            transform.LookAt(_target);
         }
 
         private void HitTarget()
         {
             var effect = Instantiate(BulletDestroyEffect, transform.position, transform.rotation);
             Destroy(effect, 2);
-            Destroy(_target.gameObject);
+
+            if (AOE > 0)
+            {
+                Explode();
+            }
+            else
+            {
+                Damage(_target);
+            }
+            
             Destroy(gameObject);
+        }
+
+        private void Explode()
+        {
+            var hitObjects = Physics.OverlapSphere(transform.position, AOE);
+            foreach (var enemy in hitObjects)
+            {
+                if (enemy.CompareTag("Enemy"))
+                {
+                    Damage(enemy.transform);
+                }
+            }
+        }
+
+        private void Damage(Transform enemy)
+        {
+            Destroy(enemy.gameObject);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, AOE);
         }
     }
 }

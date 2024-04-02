@@ -283,5 +283,5 @@ MonoBehaviour:
   fireCountdown: 0
   turnSpeed: 15
   rotator: {fileID: 6388501447405980264}
-  bulletPrefab: {fileID: 35000729005689904, guid: 3dacf72e4cb714ffaa0c8563699f7624, type: 3}
+  bulletPrefab: {fileID: 4664011668641399421, guid: b371ac1ac90fd457cb65d257e2c26eeb, type: 3}
   firePoint: {fileID: 7776211209276839025}
