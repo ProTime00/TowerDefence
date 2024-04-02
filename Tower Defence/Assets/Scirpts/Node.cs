@@ -5,7 +5,8 @@ namespace Scirpts
 {
     public class Node : MonoBehaviour
     {
-        private GameObject _turret;
+        [Header("Optional")]
+        public GameObject _turret;
         
         
         private Material _material ;
@@ -20,7 +21,7 @@ namespace Scirpts
 
         private void OnMouseDown()
         {
-            if (BuildManager.Instance.GetTurretToBuild() is null)
+            if (!BuildManager.Instance.CanBuild)
             {
                 return;
             }
@@ -30,11 +31,7 @@ namespace Scirpts
                 return;
             }
 
-            var turretToBuild = BuildManager.Instance.GetTurretToBuild();
-            
-            Vector3 offset = Vector3.zero;
-            offset.y += 0.5f;
-            _turret = Instantiate(turretToBuild, transform.position + offset, transform.rotation);
+            BuildManager.Instance.BuildTurretOn(this);
         }
 
         private void OnMouseEnter()
@@ -43,7 +40,7 @@ namespace Scirpts
             {
                 return;
             }
-            if (BuildManager.Instance.GetTurretToBuild() is null)
+            if (!BuildManager.Instance.CanBuild)
             {
                 return;
             }
