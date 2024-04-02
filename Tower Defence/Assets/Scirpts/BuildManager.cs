@@ -19,6 +19,7 @@ namespace Scirpts
         public GameObject secondTurretPrefab;
 
         private GameObject _turretToBuild;
+        public GameObject missileTurretPrefab;
 
         public GameObject GetTurretToBuild()
         {
