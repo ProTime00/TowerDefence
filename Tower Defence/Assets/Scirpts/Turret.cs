@@ -16,6 +16,7 @@ namespace Scirpts
         [Header("Use laser")]
         public bool useLaser;
         public LineRenderer lineRenderer;
+        public ParticleSystem laserEffect;
         
         
     
@@ -48,6 +49,8 @@ namespace Scirpts
                 {
                     if (lineRenderer.enabled)
                     {
+                        
+                        laserEffect.Stop();
                         lineRenderer.enabled = false;
                     }
                 }
@@ -77,9 +80,15 @@ namespace Scirpts
             if (!lineRenderer.enabled)
             {
                 lineRenderer.enabled = true;
+                laserEffect.Play();
             }
             lineRenderer.SetPosition(0, firePoint.position);
             lineRenderer.SetPosition(1, _target.position);
+
+            Vector3 enemyToTurret = firePoint.position - _target.position;
+            laserEffect.transform.rotation = Quaternion.LookRotation(enemyToTurret);
+            
+            laserEffect.transform.position = _target.position + enemyToTurret.normalized;
         }
 
         private void LockOnTarget()
