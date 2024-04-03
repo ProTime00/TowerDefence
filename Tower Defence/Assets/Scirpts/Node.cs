@@ -44,7 +44,9 @@ namespace Scirpts
             {
                 return;
             }
-            _material.color = Color.cyan;
+
+            _material.color = BuildManager.Instance.HasMoney ? Color.cyan : Color.red;
+            
         }
 
         private void OnMouseExit()

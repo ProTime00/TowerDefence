@@ -27,7 +27,8 @@ namespace Scirpts
 
         
             _countdown -= Time.deltaTime;
-            waveCountdownText.text = Math.Round(_countdown).ToString(); 
+            _countdown = Mathf.Clamp(_countdown, 0, Mathf.Infinity);
+            waveCountdownText.text = $"{_countdown:00.0}"; 
 
 
         }

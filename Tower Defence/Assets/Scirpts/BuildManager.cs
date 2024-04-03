@@ -18,7 +18,11 @@ namespace Scirpts
 
         private TurretBlueprint _turretToBuild;
 
+        public GameObject buildEffect;
+
         public bool CanBuild => _turretToBuild is not null;
+
+        public bool HasMoney => PlayerStats.Money >= _turretToBuild.cost;
 
         public void SelectTurretToBuild(TurretBlueprint turret)
         {
@@ -38,7 +42,9 @@ namespace Scirpts
             Debug.Log($"money left {PlayerStats.Money}");
             offset.y += 0.5f;
             var temp = Instantiate(_turretToBuild.prefab, node.transform.position + offset, quaternion.identity);
+            var buildEffectTemp = Instantiate(buildEffect, node.transform.position + offset, quaternion.identity);
             node._turret = temp;
+            Destroy(buildEffectTemp, 2);
         }
     }
 }
