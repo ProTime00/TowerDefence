@@ -98,6 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  health: 100
+  moneyGain: 50
+  enemyDieEffetc: {fileID: 4342673671173925204, guid: 967f38e2637a7482a8a2178cfc188dd9, type: 3}
 --- !u!135 &8179314716577348699
 SphereCollider:
   m_ObjectHideFlags: 0

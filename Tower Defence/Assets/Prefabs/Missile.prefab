@@ -48,6 +48,7 @@ MonoBehaviour:
   speed: 25
   AOE: 4
   BulletDestroyEffect: {fileID: 4342673671173925204, guid: d898a54748dbe4a498aa54f79c642255, type: 3}
+  bulletDamage: 40
 --- !u!1001 &6152990264436344560
 PrefabInstance:
   m_ObjectHideFlags: 0

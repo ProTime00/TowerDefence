@@ -11,7 +11,10 @@ namespace Scirpts
         public float AOE;
 
         public GameObject BulletDestroyEffect;
+        public int bulletDamage = 25;
         
+        private Collider[] _results = new Collider[256];
+
 
         public void SeekTarget(Transform target)
         {
@@ -57,9 +60,14 @@ namespace Scirpts
 
         private void Explode()
         {
-            var hitObjects = Physics.OverlapSphere(transform.position, AOE);
-            foreach (var enemy in hitObjects)
+            var size = Physics.OverlapSphereNonAlloc(transform.position, AOE, _results);
+            for (var index = 0; index < size; index++)
             {
+                if (index > 255)
+                {
+                    Debug.LogError("The array _results is too small for some reasons");
+                }
+                var enemy = _results[index];
                 if (enemy.CompareTag("Enemy"))
                 {
                     Damage(enemy.transform);
@@ -69,7 +77,7 @@ namespace Scirpts
 
         private void Damage(Transform enemy)
         {
-            Destroy(enemy.gameObject);
+            enemy.GetComponent<Enemy>().TakeDamage(bulletDamage);
         }
 
         private void OnDrawGizmosSelected()

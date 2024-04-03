@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Scirpts
@@ -5,6 +6,12 @@ namespace Scirpts
     public class Enemy : MonoBehaviour
     {
         public float speed = 10;
+
+        public int health = 100;
+
+        public int moneyGain = 50;
+
+        public GameObject enemyDieEffetc;
 
         private Transform _target;
 
@@ -30,11 +37,34 @@ namespace Scirpts
         {
             if (_waypointindex >= Waypoints.WaypointsTransforms.Length - 1)
             {
-                Destroy(gameObject);
+                EndPath();
                 return;
             }
             _waypointindex++;
             _target = Waypoints.WaypointsTransforms[_waypointindex];
+        }
+
+        private void EndPath()
+        {
+            PlayerStats.Lives--;
+            Destroy(gameObject);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
+            if (health <= 0)
+            {
+                KillEnemy();
+            }
+        }
+
+        private void KillEnemy()
+        {
+            PlayerStats.Money += moneyGain;
+            var temp = Instantiate(enemyDieEffetc, transform.position, quaternion.identity);
+            Destroy(temp, 2);
+            Destroy(gameObject);
         }
     }
 }
