@@ -17,6 +17,8 @@ namespace Scirpts
 
         public GameObject enemyDieEffetc;
 
+        private bool _isDead;
+        
         private void Start()
         {
             Speed = startSpeed;
@@ -33,6 +35,13 @@ namespace Scirpts
 
         private void KillEnemy()
         {
+            // fix the issue when several sources kill an enemy in the same frame (usually with the laser)
+            if (_isDead)
+            {
+                return;
+            }
+
+            _isDead = true;
             PlayerStats.Money += moneyGain;
             var temp = Instantiate(enemyDieEffetc, transform.position, quaternion.identity);
             Destroy(temp, 2);
