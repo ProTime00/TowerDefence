@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Scirpts
@@ -15,6 +16,11 @@ namespace Scirpts
 
         private void Update()
         {
+            if (GameManager.ended)
+            {
+                enabled = false;
+                return;
+            }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 _doMovement = !_doMovement;

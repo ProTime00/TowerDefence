@@ -6,10 +6,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    private bool ended;
+    public GameObject GameOverUI;
+    public static bool ended;
     private void Start()
     {
-        Debug.Log("Change that to a better solution in the future");
+        ended = false;
+        GameOverUI.SetActive(false);
     }
 
     private void Update()
@@ -18,15 +20,22 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            EndGame();
+        }
+        
         if (PlayerStats.Lives <= 0)
         {
             EndGame();
-            ended = true;
         }
     }
 
     private void EndGame()
     {
-        Debug.Log("the game has ended");
+        
+        ended = true;
+        GameOverUI.SetActive(true);
     }
 }

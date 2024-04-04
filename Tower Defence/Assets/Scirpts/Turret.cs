@@ -15,8 +15,11 @@ namespace Scirpts
 
         [Header("Use laser")]
         public bool useLaser;
+        public int DamageOverTime = 20;
         public LineRenderer lineRenderer;
         public ParticleSystem laserEffect;
+        public GameObject lightOnLaserEffect;
+        
         
         
     
@@ -27,8 +30,8 @@ namespace Scirpts
         
         private const string EnemyTag = "Enemy";
         private Transform _target;
-    
-    
+        private Enemy _enemy;
+        private float slowPercent = 0.5f;
 
 
         private void Start()
@@ -51,6 +54,7 @@ namespace Scirpts
                     {
                         
                         laserEffect.Stop();
+                        lightOnLaserEffect.SetActive(false);
                         lineRenderer.enabled = false;
                     }
                 }
@@ -77,9 +81,12 @@ namespace Scirpts
 
         private void UseLaser()
         {
+            _enemy.TakeDamage(DamageOverTime * Time.deltaTime);
+            _enemy.Slow(slowPercent);
             if (!lineRenderer.enabled)
             {
                 lineRenderer.enabled = true;
+                lightOnLaserEffect.SetActive(true);
                 laserEffect.Play();
             }
             lineRenderer.SetPosition(0, firePoint.position);
@@ -129,6 +136,8 @@ namespace Scirpts
             if (nearestEnemy is not null && shortestDistance <= range)
             {
                 _target = nearestEnemy.transform;
+                _enemy = _target.GetComponent<Enemy>();
+                
             }
             else
             {

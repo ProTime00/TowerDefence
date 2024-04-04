@@ -36,6 +36,7 @@ namespace Scirpts
         private IEnumerator SpawnWave()
         {
             _waveIndex++;
+            PlayerStats.Rounds += 1;
             for (int i = 0; i < _waveIndex; i++)
             {
                 SpawnEnemy();

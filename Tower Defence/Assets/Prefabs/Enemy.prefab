@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8563590684417570623}
   - component: {fileID: -1059076352196969158}
   - component: {fileID: 8179314716577348699}
+  - component: {fileID: 6930614436343868821}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -97,7 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f1d249e6897943288209fa52b64dcc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  startSpeed: 10
+  Speed: 0
   health: 100
   moneyGain: 50
   enemyDieEffetc: {fileID: 4342673671173925204, guid: 967f38e2637a7482a8a2178cfc188dd9, type: 3}
@@ -122,3 +124,15 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6930614436343868821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7987666627764732346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ad71f79a86a4b6392ffff1b5794ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

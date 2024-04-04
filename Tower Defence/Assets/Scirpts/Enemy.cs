@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -5,52 +6,23 @@ namespace Scirpts
 {
     public class Enemy : MonoBehaviour
     {
-        public float speed = 10;
+        public float startSpeed = 10;
+        
+        [HideInInspector]
+        public float Speed;
 
-        public int health = 100;
+        public float health = 100;
 
         public int moneyGain = 50;
 
         public GameObject enemyDieEffetc;
 
-        private Transform _target;
-
-        private int _waypointindex;
-
         private void Start()
         {
-            _target = Waypoints.WaypointsTransforms[0];
+            Speed = startSpeed;
         }
 
-        private void Update()
-        {
-            Vector3 dir = _target.position - transform.position;
-            transform.Translate(dir.normalized * (speed * Time.deltaTime), Space.World);
-
-            if (Vector3.Distance(transform.position, _target.position) < 0.1f)
-            {
-                GetNextWaypoint();
-            }
-        }
-
-        private void GetNextWaypoint()
-        {
-            if (_waypointindex >= Waypoints.WaypointsTransforms.Length - 1)
-            {
-                EndPath();
-                return;
-            }
-            _waypointindex++;
-            _target = Waypoints.WaypointsTransforms[_waypointindex];
-        }
-
-        private void EndPath()
-        {
-            PlayerStats.Lives--;
-            Destroy(gameObject);
-        }
-
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             health -= damage;
             if (health <= 0)
@@ -65,6 +37,11 @@ namespace Scirpts
             var temp = Instantiate(enemyDieEffetc, transform.position, quaternion.identity);
             Destroy(temp, 2);
             Destroy(gameObject);
+        }
+
+        public void Slow(float slowPercent)
+        {
+            Speed = startSpeed * slowPercent;
         }
     }
 }

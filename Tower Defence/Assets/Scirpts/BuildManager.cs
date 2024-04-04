@@ -17,6 +17,8 @@ namespace Scirpts
         }
 
         private TurretBlueprint _turretToBuild;
+        private Node selectedNode;
+        public NodeUI nodeUI;
 
         public GameObject buildEffect;
 
@@ -24,27 +26,35 @@ namespace Scirpts
 
         public bool HasMoney => PlayerStats.Money >= _turretToBuild.cost;
 
-        public void SelectTurretToBuild(TurretBlueprint turret)
+        public TurretBlueprint GetTurretToBuild()
         {
-            _turretToBuild = turret;
+            return _turretToBuild;
         }
 
-        public void BuildTurretOn(Node node)
+        public void SelectNode(Node node)
         {
-            if (PlayerStats.Money < _turretToBuild.cost)
+            if (node == selectedNode)
             {
-                Debug.Log("ta pas la thune mdrrr");
+                DeselectNode();
                 return;
             }
+            selectedNode = node;
+            _turretToBuild = null;
+            
+            nodeUI.SetTarget(node);
+        }
 
-            PlayerStats.Money -= _turretToBuild.cost;
-            Vector3 offset = Vector3.zero;
-            Debug.Log($"money left {PlayerStats.Money}");
-            offset.y += 0.5f;
-            var temp = Instantiate(_turretToBuild.prefab, node.transform.position + offset, quaternion.identity);
-            var buildEffectTemp = Instantiate(buildEffect, node.transform.position + offset, quaternion.identity);
-            node._turret = temp;
-            Destroy(buildEffectTemp, 2);
+        public void DeselectNode()
+        {
+            selectedNode = null;
+            nodeUI.Hide();
+        }
+
+        public void SelectTurretToBuild(TurretBlueprint turret)
+        {
+            nodeUI.Hide();
+            _turretToBuild = turret;
+            selectedNode = null;
         }
     }
 }

@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 7114501744420890285}
   - component: {fileID: 7240433441002825128}
   m_Layer: 0
-  m_Name: Laser Beamer
+  m_Name: Laser BeamerUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,13 +163,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99b3ac1690054182addadd73a730a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 20
-  turnSpeed: 50
+  range: 25
+  turnSpeed: 100
   fireRate: 1
   fireCountdown: 0
   bulletPrefab: {fileID: 0}
   useLaser: 1
-  DamageOverTime: 20
+  DamageOverTime: 35
   lineRenderer: {fileID: 0}
   laserEffect: {fileID: 6550298222111880323}
   lightOnLaserEffect: {fileID: 8927482119144550599}
