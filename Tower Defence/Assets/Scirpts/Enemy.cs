@@ -1,6 +1,7 @@
 using System;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scirpts
 {
@@ -13,12 +14,21 @@ namespace Scirpts
 
         public float health = 100;
 
+        private float maxHp;
+
         public int moneyGain = 50;
 
         public GameObject enemyDieEffetc;
 
         private bool _isDead;
-        
+
+        public Image hp;
+
+        private void Awake()
+        {
+            maxHp = health;
+        }
+
         private void Start()
         {
             Speed = startSpeed;
@@ -27,6 +37,7 @@ namespace Scirpts
         public void TakeDamage(float damage)
         {
             health -= damage;
+            hp.fillAmount = health / maxHp;
             if (health <= 0)
             {
                 KillEnemy();
