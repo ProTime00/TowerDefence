@@ -56,6 +56,7 @@ namespace Scirpts
             PlayerStats.Money += moneyGain;
             var temp = Instantiate(enemyDieEffetc, transform.position, quaternion.identity);
             Destroy(temp, 2);
+            WaveSpawner.enemiesAlives--;
             Destroy(gameObject);
         }
 

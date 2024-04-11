@@ -4,8 +4,7 @@ using UnityEngine;
 namespace Scirpts
 {
     public class CameraController : MonoBehaviour
-    {
-
+    {   
         private float _panSpeed = 0.1f;
         private float _pixelBuffer = 10;
 

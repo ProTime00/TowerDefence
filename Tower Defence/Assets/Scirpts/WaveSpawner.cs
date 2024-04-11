@@ -7,10 +7,15 @@ namespace Scirpts
 {
     public class WaveSpawner : MonoBehaviour
     {
+        public static int enemiesAlives = 0;
+
+        public Wave[] Waves;
+        
+        
         public Transform enemyPrefab;
         public Transform spawnPoint;
     
-        public float timeBtwWaves = 5;
+        private float timeBtwWaves = 3;
         private float _countdown = 2;
 
         public Text waveCountdownText;
@@ -19,10 +24,15 @@ namespace Scirpts
 
         private void Update()
         {
+            if (enemiesAlives > 0)
+            {
+                return;
+            }
             if (_countdown <= 0)
             {
                 StartCoroutine(SpawnWave());
                 _countdown = timeBtwWaves;
+                return;
             }
 
         
@@ -35,18 +45,27 @@ namespace Scirpts
 
         private IEnumerator SpawnWave()
         {
-            _waveIndex++;
+            
             PlayerStats.Rounds += 1;
-            for (int i = 0; i < _waveIndex; i++)
+
+            Wave wave = Waves[_waveIndex];
+            for (int i = 0; i < wave.count; i++)
             {
-                SpawnEnemy();
-                yield return new WaitForSeconds(0.3f);
+                SpawnEnemy(wave.enemy);
+                yield return new WaitForSeconds(1 / wave.spawnRate);
+            }
+            _waveIndex++;
+            if (_waveIndex >= Waves.Length)
+            {
+                Debug.Log("end level 1");
+                this.enabled = false;
             }
         }
 
-        private void SpawnEnemy()
+        private void SpawnEnemy(GameObject enemy)
         {
-            Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+            enemiesAlives++;
         }
     }
 }
