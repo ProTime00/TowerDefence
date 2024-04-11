@@ -7,6 +7,8 @@ namespace Scirpts
 {
     public class WaveSpawner : MonoBehaviour
     {
+
+        private GameManager gm;
         public static int enemiesAlives = 0;
 
         public Wave[] Waves;
@@ -21,12 +23,30 @@ namespace Scirpts
         public Text waveCountdownText;
     
         private int _waveIndex;
+        private bool lastWaveSpaned;
+
+        private void Awake()
+        {
+            gm = GetComponent<GameManager>();
+            PlayerPrefs.DeleteAll();
+        }
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                gm.WinLevel();
+                enabled = false;
+            }
             if (enemiesAlives > 0)
             {
                 return;
+            }
+            
+            if (lastWaveSpaned)
+            {
+                gm.WinLevel();
+                enabled = false;
             }
             if (_countdown <= 0)
             {
@@ -49,6 +69,8 @@ namespace Scirpts
             PlayerStats.Rounds += 1;
 
             Wave wave = Waves[_waveIndex];
+
+            enemiesAlives = wave.count;
             for (int i = 0; i < wave.count; i++)
             {
                 SpawnEnemy(wave.enemy);
@@ -57,15 +79,13 @@ namespace Scirpts
             _waveIndex++;
             if (_waveIndex >= Waves.Length)
             {
-                Debug.Log("end level 1");
-                this.enabled = false;
+                lastWaveSpaned = true;
             }
         }
 
         private void SpawnEnemy(GameObject enemy)
         {
             Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
-            enemiesAlives++;
         }
     }
 }

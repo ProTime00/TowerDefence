@@ -1,10 +1,15 @@
 using System;
+using Cinemachine;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Scirpts
 {
     public class CameraController : MonoBehaviour
     {   
+        
+        
+        private CinemachineImpulseSource cinemachineBrain;
         private float _panSpeed = 0.1f;
         private float _pixelBuffer = 10;
 
@@ -12,6 +17,17 @@ namespace Scirpts
         private float _scrollSpeed = 5;
         private float _minY = 10;
         private float _maxY = 300;
+
+        private void Start()
+        {
+            cinemachineBrain = GetComponent<CinemachineImpulseSource>();
+            Bullet.OnMissileExplosion += Shake;
+        }
+
+        private void OnDestroy()
+        {
+            Bullet.OnMissileExplosion -= Shake;
+        }
 
         private void Update()
         {
@@ -85,6 +101,15 @@ namespace Scirpts
             
             
             transform.Translate(mov.normalized * _panSpeed, Space.World);
+        }
+
+        public void Shake()
+        {
+            Vector3 v = Vector3.zero;
+            v.x = Random.Range(-1f, 1f);
+            v.y = Random.Range(-1f, 1f);
+            v.z = Random.Range(-1f, 1f);
+            cinemachineBrain.GenerateImpulseWithVelocity(v / 7);
         }
     }
 }

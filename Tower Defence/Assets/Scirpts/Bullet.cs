@@ -7,6 +7,10 @@ namespace Scirpts
     {
         private Transform _target;
 
+        public delegate void Explosion();
+
+        public static event Explosion OnMissileExplosion;
+
         public float speed = 70;
         public float AOE;
 
@@ -60,6 +64,7 @@ namespace Scirpts
 
         private void Explode()
         {
+            OnMissileExplosion?.Invoke();
             var size = Physics.OverlapSphereNonAlloc(transform.position, AOE, _results);
             for (var index = 0; index < size; index++)
             {

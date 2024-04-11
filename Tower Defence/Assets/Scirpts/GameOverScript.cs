@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class GameOverScript : MonoBehaviour
 {
     public Text roundsText;
+    public SceneFader sf;
 
     private void OnEnable()
     {
@@ -19,8 +20,13 @@ public class GameOverScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void NextLevel()
+    {
+        sf.FadeTo(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void Menu()
     {
-        Debug.Log("go to menu");
+        sf.FadeTo(0);
     }
 }
